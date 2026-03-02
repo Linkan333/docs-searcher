@@ -1,12 +1,10 @@
-import { pgTable, text } from "drizzle-orm/pg-core"
+import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 export const documents = pgTable("documents", {
-  id: text("id").primaryKey(),
-
+  id: uuid("id").primaryKey(),
   method: text("method"),
-  language: text("language"),
   url: text("url"),
-
+  language: text("language"),
   signatures: text("signatures").array(),
-  examples: text("examples").array()
-})
+  examples: text("examples").array(),
+});

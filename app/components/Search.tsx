@@ -27,10 +27,8 @@ function Search() {
 
       <div className="w-full max-w-sm min-w-[200px]">
 
-        {/* SEARCH BAR */}
         <div className="relative">
 
-          {/* LANGUAGE DROPDOWN */}
           <div className="absolute top-1 left-1 flex items-center">
 
             <button
@@ -54,7 +52,6 @@ function Search() {
 
             <div className="h-6 border-l border-slate-200 ml-1"></div>
 
-            {/* DROPDOWN MENU */}
             <div className={`
               min-w-[150px]
               absolute left-0 mt-10
@@ -83,7 +80,6 @@ function Search() {
           </div>
 
 
-          {/* INPUT */}
           <input
             type="text"
             placeholder="Search docs..."
@@ -102,7 +98,6 @@ function Search() {
           />
 
 
-          {/* SEARCH BUTTON */}
           <button
             onClick={doSearch}
             className="
@@ -124,50 +119,87 @@ function Search() {
             >
               <path d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754Z" />
             </svg>
-
             Search
-
           </button>
+        </div>
+        <div className="mt-8 w-full space-y-8">
 
+  {results.map((doc, i) => (
+
+    <div
+      key={i}
+      className="
+        border
+        rounded-lg
+        p-6
+        bg-white
+      "
+    >
+
+      {/* Method Title */}
+      <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+        {doc.method}
+      </h2>
+
+
+      {/* Description */}
+      <p className="text-gray-600 mb-6">
+        {doc.description}
+      </p>
+
+
+      {/* Syntax */}
+      {doc.syntax && (
+        <div className="mb-6">
+          <div className="text-sm font-semibold text-gray-500 mb-2">
+            Syntax
+          </div>
+
+          <div className="
+            bg-gray-100
+            rounded
+            p-3
+            font-mono
+            text-sm
+          ">
+            {doc.syntax}
+          </div>
+        </div>
+      )}
+
+
+      {/* Examples */}
+      <div>
+
+        <div className="text-sm font-semibold text-gray-500 mb-2">
+          Examples
         </div>
 
+        <div className="space-y-3">
 
-        {/* RESULTS */}
-        <div className="mt-8 w-full">
+          {doc.examples.map((ex: string, j: number) => (
 
-          {results.map((doc, i) => (
-
-            <div key={i} className="mb-6 p-4 border rounded">
-
-              <div className="font-bold mb-2">
-                {doc.method}
-              </div>
-
-              {doc.examples.map((ex: string, j: number) => (
-                <pre
-                  key={j}
-                  className="
-                    bg-slate-900
-                    text-green-400
-                    p-3
-                    mb-2
-                    rounded
-                    text-xs
-                    overflow-auto
-                  "
-                >
-                  {ex}
-                </pre>
-              ))}
-
-            </div>
-
+            <pre
+              key={j}
+              className="
+                bg-gray-900
+                text-gray-100
+                p-4
+                rounded
+                text-sm
+                overflow-auto
+              "
+            >
+              {ex}
+            </pre>
           ))}
-
         </div>
-
       </div>
     </div>
+  ))}
+</div>
+        </div>
+      </div>
   );
 }
 
